@@ -1,0 +1,31 @@
+# When the e2e job fails on a pull request, start a Devin session that runs the
+# "Repair failing end-to-end tests" playbook against that PR. Devin reads the
+# failure artifacts, fixes locators or flags a product defect, and pushes a
+# commit to the PR branch for the developer to review before the work reaches QA.
+name: devin-fix-failing-e2e
+on:
+  workflow_run:
+    workflows: [e2e]
+    types: [completed]
+
+jobs:
+  start-devin:
+    if: ${{ github.event.workflow_run.conclusion == 'failure' && github.event.workflow_run.event == 'pull_request' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Start Devin session
+        env:
+          DEVIN_API_KEY: ${{ secrets.DEVIN_API_KEY }}
+          RUN_URL: ${{ github.event.workflow_run.html_url }}
+          BRANCH: ${{ github.event.workflow_run.head_branch }}
+          REPO: ${{ github.repository }}
+        run: |
+          curl -sS -X POST https://api.devin.ai/v1/sessions \
+            -H "Authorization: Bearer $DEVIN_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d @- <<JSON
+          {
+            "prompt": "!repair-failing-e2e Repository $REPO, branch $BRANCH. The e2e workflow failed: $RUN_URL. Download the playwright-report artifact, work out whether each failure is a locator change, a test data problem or a product defect, fix what belongs to the suite, and push to the branch. For product defects, comment on the pull request with the failing step and the evidence instead of changing the test.",
+            "idempotent": true
+          }
+          JSON

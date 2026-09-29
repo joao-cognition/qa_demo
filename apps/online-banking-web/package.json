@@ -1,0 +1,11 @@
+{
+  "name": "online-banking-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample online banking web app used as the target for the QA automation playbooks. No external dependencies.",
+  "scripts": {
+    "start": "node server.js",
+    "seed": "node ../../test-data/generate.js"
+  },
+  "engines": { "node": ">=18" }
+}

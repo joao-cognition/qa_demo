@@ -1,0 +1,42 @@
+# Runs the e2e suite on every pull request to the application and publishes
+# results to Xray. The suite lives in this repo for the sample; for the customer
+# the checkout step pulls the separate e2e repository.
+name: e2e
+on:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      app_url:
+        description: Environment to test (leave empty to start the sample app)
+        required: false
+
+jobs:
+  playwright:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      - run: npm ci
+        working-directory: e2e/online-banking-e2e
+      - run: npx playwright install --with-deps chromium webkit
+        working-directory: e2e/online-banking-e2e
+      - run: npm test
+        working-directory: e2e/online-banking-e2e
+        env:
+          APP_URL: ${{ inputs.app_url }}
+      - name: Publish results to Xray
+        if: always()
+        run: npm run xray:export
+        working-directory: e2e/online-banking-e2e
+        env:
+          XRAY_CLIENT_ID: ${{ secrets.XRAY_CLIENT_ID }}
+          XRAY_CLIENT_SECRET: ${{ secrets.XRAY_CLIENT_SECRET }}
+          XRAY_TEST_PLAN_KEY: ${{ vars.XRAY_TEST_PLAN_KEY }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: |
+            e2e/online-banking-e2e/playwright-report
+            e2e/online-banking-e2e/test-results

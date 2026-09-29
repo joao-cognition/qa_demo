@@ -1,0 +1,27 @@
+# Manual trigger: point Devin at a Jira story (or a set of them) and have it draft
+# manual test cases in Xray, then the Playwright automation, on a new branch.
+name: devin-generate-tests
+on:
+  workflow_dispatch:
+    inputs:
+      jira_keys:
+        description: Comma separated story keys, e.g. BANK-45,BANK-46
+        required: true
+      app_url:
+        description: Environment the stories are deployed to
+        required: true
+
+jobs:
+  start-devin:
+    runs-on: ubuntu-latest
+    steps:
+      - env:
+          DEVIN_API_KEY: ${{ secrets.DEVIN_API_KEY }}
+          KEYS: ${{ inputs.jira_keys }}
+          APP_URL: ${{ inputs.app_url }}
+          REPO: ${{ github.repository }}
+        run: |
+          curl -sS -X POST https://api.devin.ai/v1/sessions \
+            -H "Authorization: Bearer $DEVIN_API_KEY" \
+            -H "Content-Type: application/json" \
+            -d "{\"prompt\": \"!generate-e2e-tests Repository $REPO. Stories: $KEYS. Environment: $APP_URL. Follow the playbook end to end and open a pull request in the e2e repository.\"}"

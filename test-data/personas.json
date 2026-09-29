@@ -1,0 +1,28 @@
+[
+  {
+    "username": "demo.user",
+    "password": "Passw0rd!",
+    "name": "Demo User",
+    "accounts": [
+      { "name": "Everyday Current Account", "number": "12-34-56 00011122", "balance": 2450.75, "dailyLimit": 5000 },
+      { "name": "eSaver", "number": "12-34-56 00033344", "balance": 10200.0, "dailyLimit": 5000 }
+    ]
+  },
+  {
+    "username": "low.balance",
+    "password": "Passw0rd!",
+    "name": "Low Balance",
+    "accounts": [
+      { "name": "Everyday Current Account", "number": "12-34-56 00055566", "balance": 12.5, "dailyLimit": 250, "transactions": 3 }
+    ]
+  },
+  {
+    "username": "locked.user",
+    "password": "Passw0rd!",
+    "name": "Locked User",
+    "locked": true,
+    "accounts": [
+      { "name": "Everyday Current Account", "number": "12-34-56 00077788", "balance": 500, "transactions": 2 }
+    ]
+  }
+]

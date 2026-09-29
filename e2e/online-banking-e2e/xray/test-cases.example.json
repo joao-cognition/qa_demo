@@ -1,0 +1,9 @@
+{
+  "note": "Shape of the manual test cases Devin drafts before automating them. In a real project these are created in Xray (Test issue type) and the key is copied into the spec's annotation.",
+  "tests": [
+    { "key": "BANK-101", "summary": "Log on with valid credentials", "precondition": "Persona demo.user exists and is not locked", "steps": ["Open the log on page", "Enter Personal ID and password", "Select Log on"], "expected": "Accounts overview lists every account the user holds" },
+    { "key": "BANK-102", "summary": "Log on with a wrong password", "steps": ["Open the log on page", "Enter a valid Personal ID and a wrong password", "Select Log on"], "expected": "Error 'Invalid username or password' is shown and the user stays on the log on page" },
+    { "key": "BANK-301", "summary": "Transfer between own accounts", "precondition": "Persona demo.user has two accounts with sufficient balance", "steps": ["Log on", "Open Transfer", "Choose from and to accounts", "Enter 100 and a reference", "Confirm"], "expected": "Success message shows the amount and the new balance" },
+    { "key": "BANK-302", "summary": "Transfer with insufficient funds", "precondition": "Persona low.balance has less than 50 GBP", "steps": ["Log on as low.balance", "Open Transfer", "Enter 50", "Confirm"], "expected": "Error 'Insufficient funds'" }
+  ]
+}

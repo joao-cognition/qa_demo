@@ -1,0 +1,26 @@
+:root { --ink: #141414; --muted: #666; --line: #ddd; --red: #ec0000; --bg: #fafafa; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+.topbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--red); color: #fff; }
+.brand { font-weight: 600; }
+.link { background: none; border: 0; color: inherit; text-decoration: underline; cursor: pointer; font: inherit; }
+main { max-width: 720px; margin: 0 auto; padding: 16px; }
+.card { background: #fff; border: 1px solid var(--line); border-radius: 6px; padding: 16px; margin-bottom: 12px; }
+h1 { font-size: 22px; margin: 0 0 12px; }
+label { display: block; font-size: 14px; margin: 10px 0 4px; }
+input, select { width: 100%; padding: 10px; font: inherit; border: 1px solid var(--line); border-radius: 4px; }
+button.primary { margin-top: 14px; width: 100%; padding: 12px; font: inherit; font-weight: 600; background: var(--red); color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+.error { color: var(--red); font-size: 14px; margin-top: 8px; }
+.success { color: #007a3d; font-size: 14px; margin-top: 8px; }
+.accounts { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 640px) { .accounts { grid-template-columns: 1fr 1fr; } }
+.account { cursor: pointer; }
+.account .name { color: var(--muted); font-size: 13px; }
+.account .balance { font-size: 24px; font-weight: 600; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+td, th { text-align: left; padding: 8px 4px; border-bottom: 1px solid var(--line); }
+td.amount { text-align: right; }
+.neg { color: var(--red); }
+nav.tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+nav.tabs button { flex: 1; padding: 10px; font: inherit; background: #fff; border: 1px solid var(--line); border-radius: 4px; cursor: pointer; }
+nav.tabs button[aria-current="page"] { border-color: var(--ink); font-weight: 600; }

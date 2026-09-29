@@ -1,0 +1,209 @@
+{
+  "generatedFrom": "test-data/personas.json",
+  "users": [
+    {
+      "id": "u1",
+      "username": "demo.user",
+      "password": "Passw0rd!",
+      "name": "Demo User",
+      "locked": false
+    },
+    {
+      "id": "u2",
+      "username": "low.balance",
+      "password": "Passw0rd!",
+      "name": "Low Balance",
+      "locked": false
+    },
+    {
+      "id": "u3",
+      "username": "locked.user",
+      "password": "Passw0rd!",
+      "name": "Locked User",
+      "locked": true
+    }
+  ],
+  "accounts": [
+    {
+      "id": "acc-1-1",
+      "userId": "u1",
+      "name": "Everyday Current Account",
+      "number": "12-34-56 00011122",
+      "balance": 2450.75,
+      "dailyLimit": 5000
+    },
+    {
+      "id": "acc-1-2",
+      "userId": "u1",
+      "name": "eSaver",
+      "number": "12-34-56 00033344",
+      "balance": 10200,
+      "dailyLimit": 5000
+    },
+    {
+      "id": "acc-2-1",
+      "userId": "u2",
+      "name": "Everyday Current Account",
+      "number": "12-34-56 00055566",
+      "balance": 12.5,
+      "dailyLimit": 250
+    },
+    {
+      "id": "acc-3-1",
+      "userId": "u3",
+      "name": "Everyday Current Account",
+      "number": "12-34-56 00077788",
+      "balance": 500,
+      "dailyLimit": 5000
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-acc-1-1-6",
+      "accountId": "acc-1-1",
+      "date": "2026-09-27",
+      "description": "Council tax",
+      "amount": -78.42
+    },
+    {
+      "id": "tx-acc-1-2-2",
+      "accountId": "acc-1-2",
+      "date": "2026-09-26",
+      "description": "TfL",
+      "amount": -86.99
+    },
+    {
+      "id": "tx-acc-2-1-2",
+      "accountId": "acc-2-1",
+      "date": "2026-09-22",
+      "description": "EDF Energy",
+      "amount": -92.8
+    },
+    {
+      "id": "tx-acc-3-1-1",
+      "accountId": "acc-3-1",
+      "date": "2026-09-21",
+      "description": "TfL",
+      "amount": -104.37
+    },
+    {
+      "id": "tx-acc-1-2-3",
+      "accountId": "acc-1-2",
+      "date": "2026-09-21",
+      "description": "Netflix",
+      "amount": -49.92
+    },
+    {
+      "id": "tx-acc-2-1-1",
+      "accountId": "acc-2-1",
+      "date": "2026-09-20",
+      "description": "Salary",
+      "amount": 1832
+    },
+    {
+      "id": "tx-acc-1-2-1",
+      "accountId": "acc-1-2",
+      "date": "2026-09-19",
+      "description": "Netflix",
+      "amount": -58.49
+    },
+    {
+      "id": "tx-acc-1-1-1",
+      "accountId": "acc-1-1",
+      "date": "2026-09-19",
+      "description": "Amazon",
+      "amount": -44.92
+    },
+    {
+      "id": "tx-acc-3-1-0",
+      "accountId": "acc-3-1",
+      "date": "2026-09-17",
+      "description": "TfL",
+      "amount": -112.67
+    },
+    {
+      "id": "tx-acc-2-1-0",
+      "accountId": "acc-2-1",
+      "date": "2026-09-17",
+      "description": "Tesco",
+      "amount": -30.5
+    },
+    {
+      "id": "tx-acc-1-1-5",
+      "accountId": "acc-1-1",
+      "date": "2026-09-17",
+      "description": "Amazon",
+      "amount": -66.44
+    },
+    {
+      "id": "tx-acc-1-1-0",
+      "accountId": "acc-1-1",
+      "date": "2026-09-17",
+      "description": "Boots",
+      "amount": -68.34
+    },
+    {
+      "id": "tx-acc-1-1-4",
+      "accountId": "acc-1-1",
+      "date": "2026-09-13",
+      "description": "EDF Energy",
+      "amount": -45.01
+    },
+    {
+      "id": "tx-acc-1-2-0",
+      "accountId": "acc-1-2",
+      "date": "2026-09-12",
+      "description": "Tesco",
+      "amount": -42.27
+    },
+    {
+      "id": "tx-acc-1-1-7",
+      "accountId": "acc-1-1",
+      "date": "2026-09-11",
+      "description": "Rent",
+      "amount": -119.79
+    },
+    {
+      "id": "tx-acc-1-1-2",
+      "accountId": "acc-1-1",
+      "date": "2026-09-11",
+      "description": "EDF Energy",
+      "amount": -31.75
+    },
+    {
+      "id": "tx-acc-1-2-7",
+      "accountId": "acc-1-2",
+      "date": "2026-09-08",
+      "description": "Tesco",
+      "amount": -50.47
+    },
+    {
+      "id": "tx-acc-1-2-6",
+      "accountId": "acc-1-2",
+      "date": "2026-09-05",
+      "description": "Netflix",
+      "amount": -6.71
+    },
+    {
+      "id": "tx-acc-1-2-4",
+      "accountId": "acc-1-2",
+      "date": "2026-09-05",
+      "description": "TfL",
+      "amount": -55.81
+    },
+    {
+      "id": "tx-acc-1-2-5",
+      "accountId": "acc-1-2",
+      "date": "2026-09-03",
+      "description": "EDF Energy",
+      "amount": -90.64
+    },
+    {
+      "id": "tx-acc-1-1-3",
+      "accountId": "acc-1-1",
+      "date": "2026-09-01",
+      "description": "Salary",
+      "amount": 2020
+    }
+  ]
+}
