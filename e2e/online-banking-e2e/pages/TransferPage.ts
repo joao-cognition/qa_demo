@@ -7,9 +7,10 @@ export class TransferPage {
   readonly to = this.page.getByTestId("transfer-to");
   readonly amount = this.page.getByTestId("transfer-amount");
   readonly reference = this.page.getByTestId("transfer-reference");
-  // Locator contract with the app. If the product team renames this test id
-  // (LOCATOR_DRIFT=1 simulates that), this is the line Devin repairs.
-  readonly submit = this.page.getByTestId("transfer-submit");
+  // Locator contract with the app: the confirm button is `confirm-payment`
+  // (JD-147). Builds that predate the rename still ship `transfer-submit`;
+  // drop that branch once every environment serves the renamed build.
+  readonly submit = this.page.getByTestId("confirm-payment").or(this.page.getByTestId("transfer-submit"));
   readonly success = this.page.getByTestId("transfer-success");
   readonly error = this.page.getByTestId("transfer-error");
 
