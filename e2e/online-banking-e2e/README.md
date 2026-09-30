@@ -4,7 +4,7 @@ Playwright suite for the sample online banking app. It is kept in its own folder
 
 ```bash
 npm install
-npx playwright install            # downloads browsers; on a locked-down machine set PW_EXECUTABLE_PATH instead
+npx playwright install --with-deps chromium webkit   # browsers + OS libs (webkit needs them); on a locked-down machine set PW_EXECUTABLE_PATH instead
 npm test                          # desktop plus two mobile viewports, starts the app itself
 APP_URL=https://test.example npm test   # run against a shared environment
 LOCATOR_DRIFT=1 npm run test:desktop    # simulate the app renaming a test id: three transfer tests fail

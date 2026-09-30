@@ -1,6 +1,6 @@
 # Prepare test data for a test scenario
 
-Trigger: `!prepare-test-data`
+Trigger: `!QA_prepare_test_data`
 
 ## Overview
 

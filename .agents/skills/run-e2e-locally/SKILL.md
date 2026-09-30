@@ -5,7 +5,7 @@ description: Start the sample online banking app and run the Playwright suite (d
 
 # Run the e2e suite locally
 
-1. Install once: `cd e2e/online-banking-e2e && npm install && npx playwright install chromium webkit`. If browser download is blocked, point `PW_EXECUTABLE_PATH` at a Chromium already on the machine.
+1. Install once: `cd e2e/online-banking-e2e && npm install && npx playwright install --with-deps chromium webkit`. If browser download is blocked, point `PW_EXECUTABLE_PATH` at a Chromium already on the machine.
 2. Run everything: `npm test`. The config starts `apps/online-banking-web/server.js` on port 3000 and waits for `/health`.
 3. Run one surface: `npm run test:desktop` or `npm run test:mobile`. Run one test: `npx playwright test -g "insufficient funds"`.
 4. Against a shared environment: `APP_URL=https://... npm test`. The app is not started in that case.

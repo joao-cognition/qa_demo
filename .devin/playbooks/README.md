@@ -4,27 +4,27 @@ Seven playbooks that together cover the flow the team described: point Devin at 
 
 | Trigger | Playbook | Use it when |
 | --- | --- | --- |
-| `!qa-pilot` | 07 QA automation pilot orchestrator | Starting on a newly nominated application. Chooses and runs the others. |
-| `!generate-e2e-tests` | 01 Generate end-to-end tests | Stories are ready and a suite exists to add tests to. |
-| `!prepare-test-data` | 02 Prepare test data | A scenario needs data that is prepared by hand today. |
-| `!create-playwright-suite` | 03 Create a Playwright suite | The repository has no automated end-to-end tests. |
-| `!migrate-talos-to-playwright` | 04 Migrate a Talos suite | The tests exist in Talos and need to move. |
-| `!repair-failing-e2e` | 05 Repair failing end-to-end tests | A CI run failed on a pull request. CI starts it in most cases. |
-| `!mobile-app-e2e` | 06 Native mobile end-to-end | The application is a native iOS or Android app. |
+| `!QA_pilot` | 07 QA automation pilot orchestrator | Starting on a newly nominated application. Chooses and runs the others. |
+| `!QA_generate_e2e_tests` | 01 Generate end-to-end tests | Stories are ready and a suite exists to add tests to. |
+| `!QA_prepare_test_data` | 02 Prepare test data | A scenario needs data that is prepared by hand today. |
+| `!QA_create_playwright_suite` | 03 Create a Playwright suite | The repository has no automated end-to-end tests. |
+| `!QA_migrate_talos_to_playwright` | 04 Migrate a Talos suite | The tests exist in Talos and need to move. |
+| `!QA_repair_failing_e2e` | 05 Repair failing end-to-end tests | A CI run failed on a pull request. CI starts it in most cases. |
+| `!QA_mobile_app_e2e` | 06 Native mobile end-to-end | The application is a native iOS or Android app. |
 
 How they connect:
 
 ```
-!qa-pilot (parent session)
+!QA_pilot (parent session)
   ├─ scan repos, pick the path per surface, confirm access
-  ├─ !prepare-test-data                     personas and fixtures
+  ├─ !QA_prepare_test_data                     personas and fixtures
   ├─ per feature batch (child sessions)
-  │     ├─ !create-playwright-suite         if no suite
-  │     ├─ !migrate-talos-to-playwright     if Talos
-  │     └─ !generate-e2e-tests              stories -> Xray cases -> tests -> PR
-  ├─ !mobile-app-e2e                        native surfaces, then the same three
+  │     ├─ !QA_create_playwright_suite         if no suite
+  │     ├─ !QA_migrate_talos_to_playwright     if Talos
+  │     └─ !QA_generate_e2e_tests              stories -> Xray cases -> tests -> PR
+  ├─ !QA_mobile_app_e2e                        native surfaces, then the same three
   └─ CI wiring
-        └─ on failure: !repair-failing-e2e  fix locators / data, report defects
+        └─ on failure: !QA_repair_failing_e2e  fix locators / data, report defects
 ```
 
 ## Origins

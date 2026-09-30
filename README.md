@@ -19,7 +19,7 @@ docs/                        demo script and architecture notes
 ```bash
 cd e2e/online-banking-e2e
 npm install
-npx playwright install chromium webkit
+npx playwright install --with-deps chromium webkit
 npm test                           # starts the app on :3000 and runs 27 tests across three projects
 ```
 

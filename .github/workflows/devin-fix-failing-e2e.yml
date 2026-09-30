@@ -25,7 +25,7 @@ jobs:
             -H "Content-Type: application/json" \
             -d @- <<JSON
           {
-            "prompt": "!repair-failing-e2e Repository $REPO, branch $BRANCH. The e2e workflow failed: $RUN_URL. Download the playwright-report artifact, work out whether each failure is a locator change, a test data problem or a product defect, fix what belongs to the suite, and push to the branch. For product defects, comment on the pull request with the failing step and the evidence instead of changing the test.",
+            "prompt": "!QA_repair_failing_e2e Repository $REPO, branch $BRANCH. The e2e workflow failed: $RUN_URL. Download the playwright-report artifact, work out whether each failure is a locator change, a test data problem or a product defect, fix what belongs to the suite, and push to the branch. For product defects, comment on the pull request with the failing step and the evidence instead of changing the test.",
             "idempotent": true
           }
           JSON

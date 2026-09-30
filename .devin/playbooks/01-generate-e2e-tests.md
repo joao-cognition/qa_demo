@@ -1,6 +1,6 @@
 # Generate end-to-end tests from an application and its stories
 
-Trigger: `!generate-e2e-tests`
+Trigger: `!QA_generate_e2e_tests`
 
 ## Overview
 

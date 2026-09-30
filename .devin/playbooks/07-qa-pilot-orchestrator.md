@@ -1,6 +1,6 @@
 # QA automation pilot: orchestrate the playbooks on one application
 
-Trigger: `!qa-pilot`
+Trigger: `!QA_pilot`
 
 ## Overview
 
