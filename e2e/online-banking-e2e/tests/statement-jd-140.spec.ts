@@ -1,10 +1,12 @@
-import type { Locator } from "@playwright/test";
-import { test, expect, users } from "../fixtures";
+import { test, expect, users, seededTransactions } from "../fixtures";
 
 // JD-140 "Statement shows what happened to my money". The app renders debits
 // in the brand red (--red: #ec0000); anything else is the default ink colour.
+// The seed (not the rendered sign) decides which rows are debits and credits.
 const DEBIT_RED = "rgb(236, 0, 0)";
 const money = (n: number) => new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(n);
+const account = users.happyPath.accounts[0];
+const seeded = seededTransactions(account);
 
 test.describe("Statement: what happened to my money", () => {
   test.beforeEach(async ({ loginPage }) => {
@@ -12,19 +14,17 @@ test.describe("Statement: what happened to my money", () => {
   });
 
   test("a debit is shown in red with a negative amount @smoke", { annotation: { type: "xray", description: "JD-140-TC1" } }, async ({ accountsPage }) => {
-    await accountsPage.openAccount(0);
-    await expect(accountsPage.statement).toBeVisible();
-
-    const rows = await accountsPage.transactionRows.all();
-    const debits: Locator[] = [];
-    for (const row of rows) {
-      const amount = accountsPage.amountOf(row);
-      if ((await amount.innerText()).startsWith("-")) debits.push(amount);
-    }
+    const debits = seeded.map((t, i) => ({ ...t, row: i })).filter((t) => t.amount < 0);
     expect(debits.length, "the seeded account has at least one debit").toBeGreaterThan(0);
 
-    for (const amount of debits) {
-      await expect(amount).toHaveText(/^-£\d[\d,]*\.\d{2}$/);
+    await accountsPage.openAccount(0);
+    await expect(accountsPage.statement).toBeVisible();
+    await expect(accountsPage.transactionRows).toHaveCount(seeded.length);
+
+    for (const debit of debits) {
+      const amount = accountsPage.amountOf(accountsPage.transactionRows.nth(debit.row));
+      await expect(amount).toHaveText(money(debit.amount));
+      await expect(amount).toHaveText(/^-£/);
       await expect(amount).toHaveCSS("color", DEBIT_RED);
     }
   });
@@ -44,19 +44,17 @@ test.describe("Statement: what happened to my money", () => {
   });
 
   test("a credit is shown without a minus sign and not in red", { annotation: { type: "xray", description: "JD-140-TC3" } }, async ({ accountsPage }) => {
-    await accountsPage.openAccount(0);
-    await expect(accountsPage.statement).toBeVisible();
-
-    const rows = await accountsPage.transactionRows.all();
-    const credits: Locator[] = [];
-    for (const row of rows) {
-      const amount = accountsPage.amountOf(row);
-      if (!(await amount.innerText()).startsWith("-")) credits.push(amount);
-    }
+    const credits = seeded.map((t, i) => ({ ...t, row: i })).filter((t) => t.amount > 0);
     expect(credits.length, "the seeded account has at least one credit").toBeGreaterThan(0);
 
-    for (const amount of credits) {
-      await expect(amount).toHaveText(/^£\d[\d,]*\.\d{2}$/);
+    await accountsPage.openAccount(0);
+    await expect(accountsPage.statement).toBeVisible();
+    await expect(accountsPage.transactionRows).toHaveCount(seeded.length);
+
+    for (const credit of credits) {
+      const amount = accountsPage.amountOf(accountsPage.transactionRows.nth(credit.row));
+      await expect(amount).toHaveText(money(credit.amount));
+      await expect(amount).toHaveText(/^£/);
       await expect(amount).not.toHaveCSS("color", DEBIT_RED);
     }
   });

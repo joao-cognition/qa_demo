@@ -2,7 +2,7 @@ import { test as base, expect, type APIRequestContext } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage";
 import { AccountsPage } from "../pages/AccountsPage";
 import { TransferPage } from "../pages/TransferPage";
-import { users } from "./test-data";
+import { users, seededTransactions } from "./test-data";
 
 type Fixtures = {
   loginPage: LoginPage;
@@ -33,4 +33,4 @@ export const test = base.extend<Fixtures>({
   transferPage: async ({ page }, use) => use(new TransferPage(page)),
 });
 
-export { expect, users };
+export { expect, users, seededTransactions };
