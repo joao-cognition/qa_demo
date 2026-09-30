@@ -42,7 +42,7 @@ The point to make is that the data is code in the same pull request as the test,
 Explain `LOCATOR_DRIFT`: the product team renamed the confirm button's test id. Run `LOCATOR_DRIFT=1 npm run test:desktop` live, or show the earlier run: three transfer tests fail on `transfer-submit`. Show `.github/workflows/devin-fix-failing-e2e.yml` as the trigger, then start the repair session by hand:
 
 ```
-!QA_repair_failing_e2e Repository joao-cognition/qa_demo, branch main. Run the desktop project with
+!QA_repair_failing_e2e Repository joao-cognition/qa_demo, branch master. Run the desktop project with
 LOCATOR_DRIFT=1 to reproduce. Classify the failures and fix what belongs to the suite.
 ```
 
