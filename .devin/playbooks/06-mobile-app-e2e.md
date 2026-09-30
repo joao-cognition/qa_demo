@@ -1,6 +1,6 @@
 # Set up and run end-to-end tests for a native mobile app
 
-Trigger: `!mobile-app-e2e`
+Trigger: `!QA_mobile_app_e2e`
 
 ## Overview
 

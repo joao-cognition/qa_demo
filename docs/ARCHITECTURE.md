@@ -18,11 +18,11 @@
 Jira story + Figma + application in test env
         │
         ▼
- !generate-e2e-tests ──► Xray test cases ──► Playwright tests (PR in e2e repo)
+ !QA_generate_e2e_tests ──► Xray test cases ──► Playwright tests (PR in e2e repo)
         │                                            │
-        ├── !prepare-test-data (personas, fixtures)   │
+        ├── !QA_prepare_test_data (personas, fixtures)   │
         ▼                                            ▼
-   CI runs suite on every PR ──► results to Xray ──► fail? ──► !repair-failing-e2e ──► fix or defect comment
+   CI runs suite on every PR ──► results to Xray ──► fail? ──► !QA_repair_failing_e2e ──► fix or defect comment
 ```
 
 ## Secrets and boundaries

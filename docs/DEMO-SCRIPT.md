@@ -4,10 +4,11 @@ The demo runs about forty minutes on the sample application, and each part ends 
 
 ## Before the call
 
-- `npm install` and `npx playwright install` in `e2e/online-banking-e2e`; run `npm test` once so browsers and the report exist.
-- Push this repository to a GitHub organisation Devin can reach and set `DEVIN_API_KEY` as a repository secret. Leave the Xray secrets unset unless a sandbox Xray project is available; the export then writes a file instead of posting.
-- Add the seven files in `.devin/playbooks/` as playbooks in Devin with the triggers in their first line.
-- Open the sample app in a browser tab and a mobile viewport tab.
+- `npm install` and `npx playwright install --with-deps chromium webkit` in `e2e/online-banking-e2e`; run `npm test` once so browsers and the report exist (27 tests, three projects, about 15 seconds).
+- The repository is `joao-cognition/qa_demo`. Set `DEVIN_API_KEY` as a repository secret so the two `devin-*` workflows can start sessions. Leave the Xray secrets unset unless a sandbox Xray project is available; the export then writes `xray/last-export.json` instead of posting.
+- The seven playbooks in `.devin/playbooks/` exist in Devin under the `!QA_*` macros used below (`!QA_pilot`, `!QA_generate_e2e_tests`, `!QA_prepare_test_data`, `!QA_create_playwright_suite`, `!QA_migrate_talos_to_playwright`, `!QA_repair_failing_e2e`, `!QA_mobile_app_e2e`). If a playbook file changes, update the playbook in Devin to match.
+- Run `LOCATOR_DRIFT=1 npm run test:desktop` once before the call. Each of the three failing transfer tests waits out the 30 second timeout, so the run takes about 1.5 minutes; keep the report open to show instead of running it live.
+- Open the sample app in a browser tab and a mobile viewport tab (`node apps/online-banking-web/server.js`, then http://localhost:3000, `demo.user` / `Passw0rd!`).
 
 ## Moment 1: from a story to tests in Xray (15 min)
 
@@ -16,7 +17,7 @@ Start by showing the app and the accounts screen in the browser, then show `e2e/
 Start a session:
 
 ```
-!generate-e2e-tests Repository <org>/santander-uk-qa-reference, e2e suite in e2e/online-banking-e2e.
+!QA_generate_e2e_tests Repository joao-cognition/qa_demo, e2e suite in e2e/online-banking-e2e.
 Environment http://localhost:3000 (start it from the repo). Scope: the statement screen.
 Add a manual test case and an automated test for "a debit transaction is shown in red with a negative amount"
 and "the statement shows the balance that the accounts screen showed". Draft the Xray cases in
@@ -30,7 +31,7 @@ While it runs, walk the playbook text and point at the steps it is on. End on th
 Open `test-data/personas.json` and `test-data/README.md` side by side, then show the fixture in `fixtures/index.ts` resetting the app before each test. Ask Devin for a persona that does not exist:
 
 ```
-!prepare-test-data We need a user whose current account is exactly at the daily limit so a transfer
+!QA_prepare_test_data We need a user whose current account is exactly at the daily limit so a transfer
 one pound over is rejected with the limit message. Add the persona, regenerate the seed, add the test.
 ```
 
@@ -41,7 +42,7 @@ The point to make is that the data is code in the same pull request as the test,
 Explain `LOCATOR_DRIFT`: the product team renamed the confirm button's test id. Run `LOCATOR_DRIFT=1 npm run test:desktop` live, or show the earlier run: three transfer tests fail on `transfer-submit`. Show `.github/workflows/devin-fix-failing-e2e.yml` as the trigger, then start the repair session by hand:
 
 ```
-!repair-failing-e2e Repository <org>/santander-uk-qa-reference, branch main. Run the desktop project with
+!QA_repair_failing_e2e Repository joao-cognition/qa_demo, branch main. Run the desktop project with
 LOCATOR_DRIFT=1 to reproduce. Classify the failures and fix what belongs to the suite.
 ```
 
@@ -52,7 +53,7 @@ Expected result: one line changed in `pages/TransferPage.ts`, a note in the pull
 Open `legacy/pytalos-disputes/features/disputes.feature` together with the step file, and start the session:
 
 ```
-!migrate-talos-to-playwright Source legacy/pytalos-disputes. Destination e2e/online-banking-e2e.
+!QA_migrate_talos_to_playwright Source legacy/pytalos-disputes. Destination e2e/online-banking-e2e.
 Plain Playwright tests, keep the TC tags as Xray annotations. The dispute screens do not exist in the
 sample app, so stop after the inventory table and the page object draft and list what the app is missing.
 ```

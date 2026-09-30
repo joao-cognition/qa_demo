@@ -1,6 +1,6 @@
 # Create a Playwright suite where none exists
 
-Trigger: `!create-playwright-suite`
+Trigger: `!QA_create_playwright_suite`
 
 ## Overview
 

@@ -24,4 +24,4 @@ jobs:
           curl -sS -X POST https://api.devin.ai/v1/sessions \
             -H "Authorization: Bearer $DEVIN_API_KEY" \
             -H "Content-Type: application/json" \
-            -d "{\"prompt\": \"!generate-e2e-tests Repository $REPO. Stories: $KEYS. Environment: $APP_URL. Follow the playbook end to end and open a pull request in the e2e repository.\"}"
+            -d "{\"prompt\": \"!QA_generate_e2e_tests Repository $REPO. Stories: $KEYS. Environment: $APP_URL. Follow the playbook end to end and open a pull request in the e2e repository.\"}"

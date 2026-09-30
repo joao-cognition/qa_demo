@@ -1,6 +1,6 @@
 # Repair failing end-to-end tests before the work reaches QA
 
-Trigger: `!repair-failing-e2e`
+Trigger: `!QA_repair_failing_e2e`
 
 ## Overview
 

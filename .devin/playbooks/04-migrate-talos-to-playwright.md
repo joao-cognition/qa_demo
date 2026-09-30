@@ -1,6 +1,6 @@
 # Migrate a Talos suite to Playwright
 
-Trigger: `!migrate-talos-to-playwright`
+Trigger: `!QA_migrate_talos_to_playwright`
 
 ## Overview
 
