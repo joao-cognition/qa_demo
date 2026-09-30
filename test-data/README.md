@@ -9,6 +9,7 @@ Personas and why they exist:
 | `demo.user` | Happy path. Two accounts, enough balance for transfers. |
 | `low.balance` | Insufficient funds and daily limit errors. |
 | `locked.user` | Locked account message on login. |
+| `daily.limit` | Daily limit boundary (JD-141). Current account balance 1500 above a 1000 limit, so a transfer of exactly the limit is accepted and one pound over is rejected with `Daily limit is 1000` rather than `Insufficient funds`. Second account is the destination. |
 
 Regenerate after editing personas:
 
