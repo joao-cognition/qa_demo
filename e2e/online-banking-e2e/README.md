@@ -11,4 +11,4 @@ LOCATOR_DRIFT=1 npm run test:desktop    # simulate the app renaming a test id: t
 npm run xray:export               # map results to Xray keys, dry run unless XRAY_* secrets are set
 ```
 
-Layout: `pages/` holds one page object per screen and is the only place locators live. `fixtures/` resets the app data before every test and exposes the personas from `test-data/personas.json`. Each test carries an `xray` annotation with the manual test case key it automates.
+Layout: `pages/` holds one page object per screen and is the only place locators live. `fixtures/` resets the app data before every test and exposes the personas from `test-data/personas.json`. Each test carries an `xray` annotation with the manual test case key it automates. `migration/` holds the inventory tables of suites migrated from Talos; scenarios whose screens the app does not have yet are kept as `test.fixme` so they stay visible to the Xray export.

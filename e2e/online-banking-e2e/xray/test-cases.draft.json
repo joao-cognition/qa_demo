@@ -1,0 +1,54 @@
+{
+  "note": "Manual test cases drafted by Devin for JD-148 (Talos disputes suite migration). Xray is not installed on the Jira, so these are the drafts a human creates as Xray Test issues; the key is already referenced by the spec annotation and the legacy Talos tag is kept in talosTag for traceability.",
+  "story": "JD-148",
+  "tests": [
+    {
+      "key": "JD-148-TC1",
+      "talosTag": "@TC-DISP-001",
+      "summary": "Raise a dispute on a card transaction",
+      "labels": ["smoke", "disputes"],
+      "precondition": "Persona demo.user is logged on and the Everyday Current Account statement contains a debit from Amazon",
+      "steps": [
+        "Open the \"Everyday Current Account\" statement",
+        "Select the transaction with description \"Amazon\"",
+        "Choose \"Dispute this transaction\"",
+        "Pick the reason \"I did not make this purchase\"",
+        "Confirm the dispute"
+      ],
+      "expected": "Message \"Your dispute has been raised\" is shown and the transaction shows the label \"Disputed\"",
+      "spec": "tests/disputes.spec.ts > Raise a dispute on a card transaction @smoke",
+      "status": "fixme: dispute screens not in the application"
+    },
+    {
+      "key": "JD-148-TC2",
+      "talosTag": "@TC-DISP-002",
+      "summary": "Cannot dispute a credit",
+      "labels": ["disputes"],
+      "precondition": "Persona demo.user is logged on and the Everyday Current Account statement contains the credit \"Salary\"",
+      "steps": [
+        "Open the \"Everyday Current Account\" statement",
+        "Select the transaction with description \"Salary\""
+      ],
+      "expected": "The option \"Dispute this transaction\" is not available",
+      "spec": "tests/disputes.spec.ts > Cannot dispute a credit",
+      "status": "fixme: dispute screens not in the application"
+    },
+    {
+      "key": "JD-148-TC3",
+      "talosTag": "@TC-DISP-003",
+      "summary": "Reason is mandatory",
+      "labels": ["disputes"],
+      "precondition": "Persona demo.user is logged on and the Everyday Current Account statement contains debits from <merchant>",
+      "steps": [
+        "Open the \"Everyday Current Account\" statement",
+        "Select the transaction with description \"<merchant>\"",
+        "Choose \"Dispute this transaction\"",
+        "Confirm the dispute without picking a reason"
+      ],
+      "examples": [{ "merchant": "Amazon" }, { "merchant": "Tesco" }],
+      "expected": "Validation \"Choose a reason\" is shown",
+      "spec": "tests/disputes.spec.ts > Reason is mandatory (Amazon) / Reason is mandatory (Tesco)",
+      "status": "fixme: dispute screens not in the application; Tesco is not in demo.user's Everyday Current Account seed"
+    }
+  ]
+}
