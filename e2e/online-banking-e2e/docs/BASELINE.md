@@ -28,7 +28,7 @@ One page recorded at the start of the pilot so it can be repeated on the next ap
 | Fixtures | `fixtures/index.ts` extends `test` with page objects and an auto `resetData` fixture that calls `POST /api/reset` before every test |
 | Test data today | `test-data/personas.json` → `node test-data/generate.js` (seeded, deterministic) → `test-data/seed.json`, loaded by the app at start and on reset. Tests read personas through `fixtures/test-data.ts`; `seed.json` is never edited by hand |
 | Results to Jira | Each `test()` carries `{ annotation: { type: "xray", description: "<KEY>" } }`; `xray/export-results.mjs` maps `test-results/results.json` to an Xray import payload |
-| Locator drift demo | `LOCATOR_DRIFT=1` renames the confirm button test id `transfer-submit` → `confirm-payment`; 3 desktop transfer tests fail |
+| Locator drift demo | `LOCATOR_DRIFT=1` renames the confirm button test id `transfer-submit` → `confirm-payment`; every desktop test that presses the confirm button fails (3 on `master`, 5 once JD-141 lands) |
 
 ## Path chosen per surface (step 2)
 
