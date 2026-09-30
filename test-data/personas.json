@@ -24,5 +24,14 @@
     "accounts": [
       { "name": "Everyday Current Account", "number": "12-34-56 00077788", "balance": 500, "transactions": 2 }
     ]
+  },
+  {
+    "username": "daily.limit",
+    "password": "Passw0rd!",
+    "name": "Daily Limit",
+    "accounts": [
+      { "name": "Everyday Current Account", "number": "12-34-56 00099900", "balance": 1500.0, "dailyLimit": 1000, "transactions": 4 },
+      { "name": "eSaver", "number": "12-34-56 00099911", "balance": 250.0, "dailyLimit": 1000, "transactions": 2 }
+    ]
   }
 ]
