@@ -20,3 +20,12 @@ export const users = {
   lowBalance: personas.find((p) => p.username === "low.balance")!,
   locked: personas.find((p) => p.username === "locked.user")!,
 };
+
+// Statement rows the migrated disputes scenarios act on. Descriptions come from
+// the merchants list in test-data/generate.js, so the seed and the specs agree.
+export const disputeTransactions = {
+  debit: "Amazon",
+  secondDebit: "Tesco",
+  credit: "Salary",
+  reason: "I did not make this purchase",
+};
