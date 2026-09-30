@@ -1,0 +1,43 @@
+{
+  "note": "Manual test cases drafted by Devin for stories that do not yet have Xray issues (Xray is not installed on the Jira site). Keys follow <STORY>-TC<n>; when the Test issues are created in Xray, replace the key here and in the spec's xray annotation.",
+  "tests": [
+    {
+      "key": "JD-140-TC1",
+      "story": "JD-140",
+      "summary": "Debit transaction is shown in red with a negative amount",
+      "precondition": "Persona demo.user exists and its first account has at least one debit transaction in the seed",
+      "steps": [
+        "Log on as demo.user",
+        "On the accounts overview, open the first account",
+        "Look at the Amount column of every row whose amount starts with a minus sign"
+      ],
+      "expected": "Each debit amount is formatted as a negative GBP value (e.g. -£78.42) and rendered in the brand red (#ec0000)"
+    },
+    {
+      "key": "JD-140-TC2",
+      "story": "JD-140",
+      "summary": "Statement header shows the same balance as the accounts overview",
+      "precondition": "Persona demo.user exists and holds two accounts",
+      "steps": [
+        "Log on as demo.user",
+        "Note the balance shown on the first account card",
+        "Open the first account",
+        "Read the Balance shown in the statement header",
+        "Select Back to accounts and repeat for the second account"
+      ],
+      "expected": "For every account the statement header balance is identical to the balance shown on the accounts overview card, and both match the seeded balance"
+    },
+    {
+      "key": "JD-140-TC3",
+      "story": "JD-140",
+      "summary": "Credit transaction is shown without a minus sign and not in red",
+      "precondition": "Persona demo.user exists and its first account has at least one credit transaction (Salary) in the seed",
+      "steps": [
+        "Log on as demo.user",
+        "Open the first account",
+        "Look at the Amount column of every row whose amount does not start with a minus sign"
+      ],
+      "expected": "Each credit amount is formatted as a positive GBP value (e.g. £2,020.00) and is not rendered in the debit red"
+    }
+  ]
+}
