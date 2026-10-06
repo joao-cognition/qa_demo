@@ -20,7 +20,7 @@ docs/                        demo script and architecture notes
 cd e2e/online-banking-e2e
 npm install
 npx playwright install --with-deps chromium webkit
-npm test                           # starts the app on :3000 and runs 27 tests across three projects
+npm test                           # starts the app on :3000 and runs 33 tests across three projects
 ```
 
 Useful variations:
@@ -28,7 +28,7 @@ Useful variations:
 ```bash
 npm run test:desktop                     # one project
 APP_URL=https://sit.example npm test     # shared environment, app not started
-LOCATOR_DRIFT=1 npm run test:desktop     # app renames a test id; 3 transfer tests fail
+LOCATOR_DRIFT=1 npm run test:desktop     # app renames a test id; 5 transfer tests fail
 npm run xray:export                      # results -> Xray payload, dry run without secrets
 ```
 

@@ -4,10 +4,10 @@ The demo runs about forty minutes on the sample application, and each part ends 
 
 ## Before the call
 
-- `npm install` and `npx playwright install --with-deps chromium webkit` in `e2e/online-banking-e2e`; run `npm test` once so browsers and the report exist (27 tests, three projects, about 15 seconds).
+- `npm install` and `npx playwright install --with-deps chromium webkit` in `e2e/online-banking-e2e`; run `npm test` once so browsers and the report exist (33 tests, three projects, about 20 seconds).
 - The repository is `joao-cognition/qa_demo`. Set `DEVIN_API_KEY` as a repository secret so the two `devin-*` workflows can start sessions. Leave the Xray secrets unset unless a sandbox Xray project is available; the export then writes `xray/last-export.json` instead of posting.
 - The seven playbooks in `.devin/playbooks/` exist in Devin under the `!QA_*` macros used below (`!QA_pilot`, `!QA_generate_e2e_tests`, `!QA_prepare_test_data`, `!QA_create_playwright_suite`, `!QA_migrate_talos_to_playwright`, `!QA_repair_failing_e2e`, `!QA_mobile_app_e2e`). If a playbook file changes, update the playbook in Devin to match.
-- Run `LOCATOR_DRIFT=1 npm run test:desktop` once before the call. Each of the three failing transfer tests waits out the 30 second timeout, so the run takes about 1.5 minutes; keep the report open to show instead of running it live.
+- Run `LOCATOR_DRIFT=1 npm run test:desktop` once before the call. Each of the five failing transfer tests waits out the 30 second timeout, so the run takes about 2.5 minutes; keep the report open to show instead of running it live.
 - Open the sample app in a browser tab and a mobile viewport tab (`node apps/online-banking-web/server.js`, then http://localhost:3000, `demo.user` / `Passw0rd!`).
 
 ## Moment 1: from a story to tests in Xray (15 min)
@@ -39,7 +39,7 @@ The point to make is that the data is code in the same pull request as the test,
 
 ## Moment 3: CI fails, Devin repairs (10 min)
 
-Explain `LOCATOR_DRIFT`: the product team renamed the confirm button's test id. Run `LOCATOR_DRIFT=1 npm run test:desktop` live, or show the earlier run: three transfer tests fail on `transfer-submit`. Show `.github/workflows/devin-fix-failing-e2e.yml` as the trigger, then start the repair session by hand:
+Explain `LOCATOR_DRIFT`: the product team renamed the confirm button's test id. Run `LOCATOR_DRIFT=1 npm run test:desktop` live, or show the earlier run: five transfer tests fail on `transfer-submit`. Show `.github/workflows/devin-fix-failing-e2e.yml` as the trigger, then start the repair session by hand:
 
 ```
 !QA_repair_failing_e2e Repository joao-cognition/qa_demo, branch main. Run the desktop project with

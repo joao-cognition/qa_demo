@@ -1,0 +1,35 @@
+{
+  "note": "Manual test cases drafted by Devin. Xray is not installed on this Jira, so these keys are the ones used in the specs' `xray` annotation; when Xray is available, create them as Test issues linked to the story and replace the keys.",
+  "tests": [
+    {
+      "key": "JD-141-TC1",
+      "story": "JD-141",
+      "criterion": "AC1",
+      "summary": "Transfer of exactly the daily limit is accepted",
+      "precondition": "Persona daily.limit exists. Its Everyday Current Account holds more than its daily limit (seed: balance 1500, limit 1000) and it has a second account (eSaver, balance 250) to receive the money",
+      "steps": [
+        "Log on as daily.limit",
+        "Open Transfer",
+        "Choose Everyday Current Account as From and eSaver as To",
+        "Enter an amount equal to the daily limit (1000) and a reference",
+        "Select Confirm transfer"
+      ],
+      "expected": "Success message 'Transfer of £1,000.00 sent. New balance £500.00.' is shown with no error, and Accounts shows Everyday Current Account at £500.00 and eSaver at £1,250.00"
+    },
+    {
+      "key": "JD-141-TC2",
+      "story": "JD-141",
+      "criterion": "AC2",
+      "summary": "Transfer of one pound over the daily limit is rejected with 'Daily limit is <limit>'",
+      "precondition": "Persona daily.limit exists. Its Everyday Current Account holds more than the daily limit plus one pound (seed: balance 1500, limit 1000), so the rejection is caused by the limit and not by insufficient funds",
+      "steps": [
+        "Log on as daily.limit",
+        "Open Transfer",
+        "Choose Everyday Current Account as From and eSaver as To",
+        "Enter an amount one pound over the daily limit (1001)",
+        "Select Confirm transfer"
+      ],
+      "expected": "Error 'Daily limit is 1000' is shown with no success message, and Accounts still shows £1,500.00 and £250.00"
+    }
+  ]
+}
