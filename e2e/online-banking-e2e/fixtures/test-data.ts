@@ -19,4 +19,5 @@ export const users = {
   happyPath: personas.find((p) => p.username === "demo.user")!,
   lowBalance: personas.find((p) => p.username === "low.balance")!,
   locked: personas.find((p) => p.username === "locked.user")!,
+  dailyLimit: personas.find((p) => p.username === "daily.limit")!,
 };
